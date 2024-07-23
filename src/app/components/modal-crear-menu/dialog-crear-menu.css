@@ -1,0 +1,55 @@
+/* styles.css */
+  .modal-content-container {
+    /* Estilos para el contenido del modal */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 300px;
+  }
+  
+  .mat-form-field {
+    /* Estilos para el formulario dentro del modal */
+    width: 100%;
+  }
+  
+  .file {
+    /* Estilos para el campo de carga de archivos */
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .file input[type="file"] {
+    /* Estilos para ocultar el campo de carga de archivos predeterminado */
+    display: none;
+  }
+  
+  .file-custom {
+    /* Estilos para el texto personalizado del campo de carga de archivos */
+    display: block;
+    padding: 5px;
+  }
+  
+  button.mat-button {
+    /* Estilos para el botón "Agregar nuevo menú" */
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  button.mat-button:hover {
+    /* Estilos para el estado de hover del botón */
+    background-color: #0056b3;
+  }
+  
+  /* Agrega cualquier otro estilo que desees aquí */
+  

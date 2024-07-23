@@ -1,0 +1,82 @@
+.modal-background {
+  padding: 1rem;
+}
+
+/* Add the desired max-height and set overflow-y to auto to enable vertical scrolling */
+.table-container {
+  max-height: 300px;
+  /* Adjust the value as per your requirement */
+  overflow-y: auto;
+}
+
+/* Make the table header fixed */
+.table-container table {
+  table-layout: fixed;
+}
+
+/* Style the table header cells */
+.table-container th {
+  position: sticky;
+  top: 0;
+  background-color: #f2f2f2;
+  /* Set the background color for the fixed header */
+  z-index: 1;
+  /* Ensure the header appears above the table body */
+}
+
+/* Reset the positioning of the table header cells in the first column */
+.table-container th:first-child {
+  left: 0;
+}
+
+/* tabla-checkbox.component.css */
+
+/* Estilos para la tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+/* Estilos para los checkboxes */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Estilos para las filas impares */
+.table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* Estilos para las filas al pasar el mouse */
+.table tbody tr:hover {
+  background-color: #e0e0e0;
+}
+
+/* Estilos para las celdas de checkboxes seleccionadas */
+.table input[type="checkbox"]:checked {
+  background-color: #007bff;
+}
+
+/* Estilos para la fila "Marcar todos" */
+.select-all-row {
+  background-color: #f2f2f2;
+}
+
+.select-all-row>td {
+  background-color: #1e262b;
+  color: #f2f2f2;
+}
+

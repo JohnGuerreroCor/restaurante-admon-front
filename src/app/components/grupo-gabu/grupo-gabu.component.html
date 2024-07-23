@@ -1,0 +1,364 @@
+<app-navbar>
+  <div class="p-4 text-center" #target>
+    <div class="card rounded-2 p-0 shadow-sm mt-5 mb-5">
+      <div
+        class="card-header ml-4 mr-4 cursor-select"
+        [routerLink]="['/inicio']"
+        routerLinkActive="router-link-active"
+      >
+        <h4 class="font-usco-default">Grupo Gabu</h4>
+      </div>
+      <div class="card-body">
+        <div class="row mt-4">
+          <div class="col">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Buscar registro</mat-label>
+              <input
+                matInput
+                placeholder="Ejem. primero"
+                #filterInput
+                (keyup)="applyFilter(filterInput.value)"
+              />
+              <button matSuffix mat-icon-button>
+                <mat-icon>search</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-3 mt-3 text-right">
+            <button
+              aria-label="Nuevo"
+              class="btn btn-usco-dark"
+              (click)="openDialog()"
+            >
+              <i class="fa-solid fa-plus"></i> Nuevo
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              matSort
+              class="table table-hover shadow-sm"
+            >
+              <ng-container matColumnDef="tipoGabu">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Tipo
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- <input [(ngModel)]="element.tipoGabu" /> -->
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.tipoGabu.nombre }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="estado">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Estado
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- <input [(ngModel)]="element.estado" /> -->
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.estado }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="identificacion">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Identificacion
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- <input [(ngModel)]="element.identificacion" /> -->
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.persona.identificacion }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="codigo">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Codigo
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- <input [(ngModel)]="element.codigo" /> -->
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.persona.codigo }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="nombre">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Nombre
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- <input [(ngModel)]="element.nombre" /> -->
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.persona.nombre }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="apellido">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Apellido
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- <input [(ngModel)]="element.apellido" /> -->
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.persona.apellido }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="programa">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Programa
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- <input [(ngModel)]="element.programa" /> -->
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.programa }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="vigencia">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Vigencia
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- <input [(ngModel)]="element.vigencia" /> -->
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.vigencia }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="desayuno">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Desayuno
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- Utiliza un *ngFor para recorrer todos los elementos en element.diaCodigo -->
+                    <div
+                      *ngFor="let dia of element.diaBeneficio; let last = last"
+                    >
+                      <!-- <input [(ngModel)]="dia.nombre" /> -->
+                      <!-- Agrega una coma después de cada elemento, excepto el último -->
+                      <!--  <span *ngIf="!last">, </span> -->
+                    </div>
+                  </ng-container>
+                  <ng-template #editMode>
+                    <!-- Utiliza un *ngFor para recorrer todos los elementos en element.diaCodigo -->
+                    <div
+                      *ngFor="let dia of element.diaBeneficio; let last = last"
+                    >
+                      {{
+                        dia.tipoServicio.nombre.trim().toUpperCase() ==
+                          "DESAYUNO" && dia.estado == 1
+                          ? dia.dia.nombre.substring(0, 3)
+                          : null
+                      }}
+                      <!-- Agrega una coma después de cada elemento, excepto el último -->
+                      <!-- <span *ngIf="!last">,</span> -->
+                    </div>
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="almuerzo">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Almuerzo
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- Utiliza un *ngFor para recorrer todos los elementos en element.diaCodigo -->
+                    <div
+                      *ngFor="let dia of element.diaBeneficio; let last = last"
+                    >
+                      <!-- <input [(ngModel)]="dia.nombre" /> -->
+                      <!-- Agrega una coma después de cada elemento, excepto el último -->
+                      <!--  <span *ngIf="!last">, </span> -->
+                    </div>
+                  </ng-container>
+                  <ng-template #editMode>
+                    <!-- Utiliza un *ngFor para recorrer todos los elementos en element.diaCodigo -->
+                    <div
+                      *ngFor="let dia of element.diaBeneficio; let last = last"
+                    >
+                      {{
+                        dia.tipoServicio.nombre.trim().toUpperCase() ==
+                          "ALMUERZO" && dia.estado == 1
+                          ? dia.dia.nombre.substring(0, 3)
+                          : null
+                      }}
+                      <!-- Agrega una coma después de cada elemento, excepto el último -->
+                      <!-- <span *ngIf="!last">,</span> -->
+                    </div>
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="cena">
+                <th
+                  mat-header-cell
+                  mat-sort-header
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Cena
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <!-- Utiliza un *ngFor para recorrer todos los elementos en element.diaCodigo -->
+                    <div
+                      *ngFor="let dia of element.diaBeneficio; let last = last"
+                    >
+                      <!-- <input [(ngModel)]="dia.nombre" /> -->
+                      <!-- Agrega una coma después de cada elemento, excepto el último -->
+                      <!--  <span *ngIf="!last">, </span> -->
+                    </div>
+                  </ng-container>
+                  <ng-template #editMode>
+                    <!-- Utiliza un *ngFor para recorrer todos los elementos en element.diaCodigo -->
+                    <div
+                      *ngFor="let dia of element.diaBeneficio; let last = last"
+                    >
+                      {{
+                        dia.tipoServicio.nombre.trim().toUpperCase() ==
+                          "CENA" && dia.estado == 1
+                          ? dia.dia.nombre.substring(0, 3) + " "
+                          : null
+                      }}
+                      <!-- Agrega una coma después de cada elemento, excepto el último -->
+                      <!-- <span *ngIf="!last">,</span> -->
+                    </div>
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <!-- New column for the buttons -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                  <!-- Add buttons for Inhabilitar and Editar -->
+                  <button
+                    mat-icon-button
+                    aria-label="Boton editar"
+                    (click)="editarGuardar(element)"
+                  >
+                    <ng-container *ngIf="element.isEditing; else editIcon">
+                      <mat-icon>save</mat-icon>
+                    </ng-container>
+                    <ng-template #editIcon>
+                      <mat-icon>edit</mat-icon>
+                    </ng-template>
+                  </button>
+                  <button
+                    mat-icon-button
+                    aria-label="Boton inhabilitar"
+                    (click)="inhabilitarCancelar(element)"
+                  >
+                    <ng-container *ngIf="element.isEditing; else blockIcon">
+                      <mat-icon>cancel</mat-icon>
+                    </ng-container>
+                    <ng-template #blockIcon>
+                      <mat-icon>block</mat-icon>
+                    </ng-template>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+              <tr mat-no-data-row>
+                <td colspan="3">
+                  No data matching the filter "{{ filterInput.value }}"
+                </td>
+              </tr>
+            </table>
+
+            <mat-paginator
+              [pageSizeOptions]="[5, 10, 20]"
+              showFirstLastButtons
+              aria-label="seleccione pagina de horario de servicios"
+            >
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navbar>

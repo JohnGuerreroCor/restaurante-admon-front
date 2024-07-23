@@ -1,0 +1,325 @@
+<app-navbar>
+  <div class="p-4 text-center">
+    <div class="card rounded-2 p-0 shadow-sm mt-5 mb-5">
+      <div
+        class="card-header ml-4 mr-4 cursor-select"
+        [routerLink]="['/inicio']"
+        routerLinkActive="router-link-active"
+      >
+        <h4 class="font-usco-default">Formulario de contrato</h4>
+      </div>
+      <div class="card-body">
+        <div class="row pl-4 pr-4">
+          <div class="col">
+            <form
+              (ngSubmit)="submitForm()"
+              #formulario="ngForm"
+              [formGroup]="contratoForm"
+            >
+              <div class="row mt-4">
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Tipo de contrato</mat-label>
+                    <mat-select formControlName="tipoContrato" required>
+                      <mat-option
+                        *ngFor="let contractType of contractTypes"
+                        [value]="contractType.codigo"
+                        >{{ contractType.nombre }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Fecha inicial</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="fechaInicialPicker"
+                      formControlName="fechaInicial"
+                      name="fechaInicial"
+                      required
+                    />
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="fechaInicialPicker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #fechaInicialPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Fecha final</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="fechaFinalPicker"
+                      formControlName="fechaFinal"
+                      name="fechaFinal"
+                      required
+                    />
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="fechaFinalPicker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #fechaFinalPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <span matPrefix class="p-3"
+                      ><i class="fa-solid fa-dollar-sign"></i
+                    ></span>
+                    <mat-label>Valor total del contrato</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      required
+                      name="valorTotalContrato"
+                      formControlName="valorTotalContrato"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <span matPrefix class="p-3"
+                      ><i class="fa-solid fa-dollar-sign"></i
+                    ></span>
+                    <mat-label>Subsidio universidad desayuno</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      required
+                      name="valorUnitarioDesayuno"
+                      formControlName="valorUnitarioDesayuno"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <span matPrefix class="p-3"
+                      ><i class="fa-solid fa-dollar-sign"></i
+                    ></span>
+                    <mat-label>Subsidio universidad almuerzo</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      required
+                      name="valorUnitarioAlmuerzo"
+                      formControlName="valorUnitarioAlmuerzo"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <span matPrefix class="p-3"
+                      ><i class="fa-solid fa-dollar-sign"></i
+                    ></span>
+                    <mat-label>Subsidio universidad cena</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      required
+                      name="valorUnitarioCena"
+                      formControlName="valorUnitarioCena"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <span matPrefix class="p-3"
+                      ><i class="fa-solid fa-dollar-sign"></i
+                    ></span>
+                    <mat-label>Pago estudiante desayuno</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      required
+                      name="valorPagadoDesayuno"
+                      formControlName="valorPagadoDesayuno"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <span matPrefix class="p-3"
+                      ><i class="fa-solid fa-dollar-sign"></i
+                    ></span>
+                    <mat-label>Pago estudiante almuerzo</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      required
+                      name="valorPagadoAlmuerzo"
+                      formControlName="valorPagadoAlmuerzo"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <span matPrefix class="p-3"
+                      ><i class="fa-solid fa-dollar-sign"></i
+                    ></span>
+                    <mat-label>Pago estudiante cena</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      required
+                      name="valorPagadoCena"
+                      formControlName="valorPagadoCena"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Cantidad total desayunos</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      required
+                      name="cantidadTotalDesayunos"
+                      formControlName="cantidadTotalDesayunos"
+                    /><mat-hint
+                      >Aproximadamente:
+                      {{
+                        valorEstimadoRaciones[0]
+                          | currency : "COP" : "symbol" : "0.0-0"
+                      }}</mat-hint
+                    >
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Cantidad total almuerzos</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      required
+                      name="cantidadTotalAlmuerzos"
+                      formControlName="cantidadTotalAlmuerzos"
+                    />
+                    <mat-hint
+                      >Aproximadamente:
+                      {{
+                        valorEstimadoRaciones[1]
+                          | currency : "COP" : "symbol" : "0.0-0"
+                      }}</mat-hint
+                    >
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Cantidad total cenas</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      required
+                      name="cantidadTotalCenas"
+                      formControlName="cantidadTotalCenas"
+                    />
+                    <mat-hint
+                      >Aproximadamente:
+                      {{
+                        valorEstimadoRaciones[2]
+                          | currency : "COP" : "symbol" : "0.0-0"
+                      }}</mat-hint
+                    >
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-2 text-justify font-weight-bold">
+                  <label
+                    >Valor total contrato:<br />{{
+                      this.contratoForm.get("valorTotalContrato")?.value
+                        | currency : "COP" : "symbol" : "0.0-0"
+                    }}
+                  </label>
+                </div>
+                <div class="col-sm-2 text-justify font-weight-bold">
+                  <label
+                    >Valor total comidas:<br />
+                    {{
+                      valorEstimadoRaciones[0] +
+                        valorEstimadoRaciones[1] +
+                        valorEstimadoRaciones[2]
+                        | currency : "COP" : "symbol" : "0.0-0"
+                    }}</label
+                  >
+                </div>
+                <div class="col text-left mt-2">
+                  <button
+                    #botonCalculadora
+                    class="btn btn-info"
+                    (click)="calcularEstimaciones($event)"
+                  >
+                    <i class="fa-solid fa-calculator fa-xl"></i> Calcular
+                  </button>
+                </div>
+              </div>
+              <div class="row text-right">
+                <div class="col">
+                  <button
+                    class="btn btn-warning"
+                    (click)="cancelar()"
+                    [routerLink]="['/contratos']"
+                  >
+                    Cancelar
+                  </button>
+                  <button class="btn btn-success ml-2" type="submit">
+                    Guardar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navbar>

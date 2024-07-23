@@ -1,0 +1,325 @@
+<app-navbar>
+  <div class="p-4 text-center" #target>
+    <div class="card rounded-2 p-0 shadow-sm mt-5 mb-5">
+      <div
+        class="card-header ml-4 mr-4 cursor-select"
+        [routerLink]="['/inicio']"
+        routerLinkActive="router-link-active"
+      >
+        <h4 class="font-usco-default">Contratos</h4>
+      </div>
+      <div class="card-body">
+        <div class="row pl-4 pr-4">
+          <div class="col">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Buscar registro</mat-label>
+              <input
+                matInput
+                #filterInput
+                (keyup)="applyFilter(filterInput.value)"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col text-right mt-4">
+            <button class="btn btn-usco-dark" [routerLink]="['/crearContrato']">
+              <i class="fa-solid fa-plus"></i> Nuevo
+            </button>
+          </div>
+        </div>
+        <div class="row pl-4 pr-4">
+          <div class="col">
+            <section class="example-container" tabindex="0">
+              <table
+                mat-table
+                [dataSource]="dataSource"
+                matSort
+                class="table table-hover shadow"
+              >
+                <ng-container matColumnDef="tipoContrato" sticky>
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Tipo Contrato
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="columna-fecha">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.tipoContrato.nombre" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{ element.tipoContrato.nombre }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dependencia" sticky>
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Dependencia
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="columna-fecha">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.dependencia.nombre" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{ element.dependencia.nombre }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaInicial">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Fecha Inicial
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="columna-fecha">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.fechaInicial" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{ element.fechaInicial | date : "dd-MM-yyyy" }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaFinal">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Fecha Final
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="columna-fecha">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.fechaFinal" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{ element.fechaFinal | date : "dd-MM-yyyy" }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cantidadDesayunos">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Cantidad Desayunos
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.cantidadDesayunos" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{ element.cantidadDesayunos }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cantidadAlmuerzos">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Cantidad Almuerzos
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.cantidadAlmuerzos" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{ element.cantidadAlmuerzos }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cantidadCenas">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Cantidad Cenas
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.cantidadCenas" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{ element.cantidadCenas }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="pagoEstudianteDesayuno">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Precio Desayuno
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.pagoEstudianteDesayuno" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{
+                        element.pagoEstudianteDesayuno
+                          | currency : "COP" : "symbol" : "0.0-0"
+                      }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="pagoEstudianteAlmuerzo">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Precio Almuerzo
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.pagoEstudianteAlmuerzo" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{
+                        element.pagoEstudianteAlmuerzo
+                          | currency : "COP" : "symbol" : "0.0-0"
+                      }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="pagoEstudianteCena">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Precio Cena
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.pagoEstudianteCena" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{
+                        element.pagoEstudianteCena
+                          | currency : "COP" : "symbol" : "0.0-0"
+                      }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="subsidioDesayuno">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Subsidio Desayuno
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.subsidioDesayuno" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{
+                        element.subsidioDesayuno
+                          | currency : "COP" : "symbol" : "0.0-0"
+                      }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="subsidioAlmuerzo">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Subsidio Almuerzo
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.subsidioAlmuerzo" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{
+                        element.subsidioAlmuerzo
+                          | currency : "COP" : "symbol" : "0.0-0"
+                      }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="subsidioCena">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Subsidio Cena
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.subsidioCena" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{
+                        element.subsidioCena
+                          | currency : "COP" : "symbol" : "0.0-0"
+                      }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="valorContrato">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Valor Contrato
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.valorContrato" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{
+                        element.valorContrato
+                          | currency : "COP" : "symbol" : "0.0-0"
+                      }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="estado">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                    Estado
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.isEditing; else editMode">
+                      <input [(ngModel)]="element.estado" />
+                    </ng-container>
+                    <ng-template #editMode>
+                      {{ element.estado }}
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <!-- New column for the buttons -->
+                <ng-container matColumnDef="actions" stickyEnd>
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element">
+                    <!-- Add buttons for Inhabilitar and Editar -->
+                    <button
+                      mat-icon-button
+                      aria-label="Boton editar"
+                      (click)="editarGuardar(element)"
+                    >
+                      <ng-container *ngIf="element.isEditing; else editIcon">
+                        <mat-icon>save</mat-icon>
+                      </ng-container>
+                      <ng-template #editIcon>
+                        <mat-icon>edit</mat-icon>
+                      </ng-template>
+                    </button>
+                    <button
+                      mat-icon-button
+                      aria-label="Boton inhabilitar"
+                      (click)="inhabilitarCancelar(element)"
+                    >
+                      <ng-container *ngIf="element.isEditing; else blockIcon">
+                        <mat-icon>cancel</mat-icon>
+                      </ng-container>
+                      <ng-template #blockIcon>
+                        <mat-icon>block</mat-icon>
+                      </ng-template>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+
+                <tr mat-no-data-row>
+                  <td colspan="3">
+                    No data matching the filter "{{ filterInput.value }}"
+                  </td>
+                </tr>
+              </table>
+            </section>
+          </div>
+        </div>
+        <div class="row text-right">
+          <div class="col">
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navbar>

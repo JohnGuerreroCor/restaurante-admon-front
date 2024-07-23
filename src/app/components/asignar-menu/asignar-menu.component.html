@@ -1,0 +1,134 @@
+<app-navbar>
+  <div class="p-4 text-center">
+    <div class="card rounded-2 p-0 shadow-sm mt-5 mb-5">
+      <div
+        class="card-header ml-4 mr-4 cursor-select"
+        [routerLink]="['/inicio']"
+        routerLinkActive="router-link-active"
+      >
+        <h4 class="font-usco-default">Asignar menú</h4>
+      </div>
+      <div class="card-body">
+        <div class="row text-right">
+          <div class="col mb-2">
+            <app-modal-crear-menu></app-modal-crear-menu>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col table-responsive">
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              class="table table-hover shadow-sm"
+            >
+              <ng-container matColumnDef="opcionesMenu">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Opciones
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <input [(ngModel)]="element.opcionesMenu" />
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.opcionesMenu }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="tipoServicio">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Tipo Servicio
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <input [(ngModel)]="element.tipoServicio" />
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.tipoServicio }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="diaSemana">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Día Semana
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <input [(ngModel)]="element.diaSemana" />
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.diaSemana }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="descripcionMenu">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  class="custom-sticky-header"
+                >
+                  Descripción Menú
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-container *ngIf="element.isEditing; else editMode">
+                    <input [(ngModel)]="element.descripcionMenu" />
+                  </ng-container>
+                  <ng-template #editMode>
+                    {{ element.descripcionMenu }}
+                  </ng-template>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                  <button
+                    mat-icon-button
+                    aria-label="Boton editar"
+                    (click)="editarGuardar(element)"
+                  >
+                    <ng-container *ngIf="element.isEditing; else editIcon">
+                      <mat-icon>save</mat-icon>
+                    </ng-container>
+                    <ng-template #editIcon>
+                      <mat-icon>edit</mat-icon>
+                    </ng-template>
+                  </button>
+                  <button
+                    mat-icon-button
+                    aria-label="Boton eliminar"
+                    (click)="eliminarCancelar(element)"
+                  >
+                    <ng-container *ngIf="element.isEditing; else deleteIcon">
+                      <mat-icon>cancel</mat-icon>
+                    </ng-container>
+                    <ng-template #deleteIcon>
+                      <mat-icon>delete</mat-icon>
+                    </ng-template>
+                  </button>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navbar>

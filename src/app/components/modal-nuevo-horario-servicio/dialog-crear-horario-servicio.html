@@ -1,0 +1,141 @@
+<h2 mat-dialog-title class="text-white bg-usco-vt-d6">
+  <i class="fa-solid fa-circle-info"></i> Configuración horario servicio
+</h2>
+<mat-dialog-content>
+  <form [formGroup]="servicioForm" class="pt-4">
+    <fieldset class="scheduler-border shadow-sm">
+      <legend class="scheduler-border font-usco-vt">
+        Distribución de servicio
+      </legend>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="example-full-width" appearance="outline"
+            ><mat-select formControlName="tipoServicio">
+              <mat-option
+                *ngFor="let tipoServicio of tiposServicio"
+                [value]="tipoServicio"
+              >
+                {{ tipoServicio.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-label>Max. consumos</mat-label>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <input
+              matInput
+              formControlName="cantidadComidas"
+              required
+              type="number"
+              class="example-right-align"
+              placeholder="Valor numerico"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-label>Max. ventas</mat-label>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <input
+              matInput
+              formControlName="cantidadVentas"
+              required
+              type="number"
+              class="example-right-align"
+              placeholder="Valor numerico"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-label>Max. tiquetes</mat-label>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <input
+              matInput
+              formControlName="cantidadTiquetes"
+              required
+              type="number"
+              class="example-right-align"
+              placeholder="Valor numerico"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </fieldset>
+    <div class="row">
+      <div class="col">
+        <fieldset class="scheduler-border shadow-sm">
+          <legend class="scheduler-border font-usco-vt">Dias</legend>
+          <section [formGroup]="diasSemana">
+            <div class="grid-container">
+              <div class="grid-item">
+                <mat-checkbox formControlName="lunes">Lunes</mat-checkbox>
+              </div>
+              <div class="grid-item">
+                <mat-checkbox formControlName="martes">Martes</mat-checkbox>
+              </div>
+              <div class="grid-item">
+                <mat-checkbox formControlName="miercoles"
+                  >Miércoles</mat-checkbox
+                >
+              </div>
+              <div class="grid-item">
+                <mat-checkbox formControlName="jueves">Jueves</mat-checkbox>
+              </div>
+              <div class="grid-item">
+                <mat-checkbox formControlName="viernes">Viernes</mat-checkbox>
+              </div>
+              <div class="grid-item">
+                <mat-checkbox formControlName="sabado">Sábado</mat-checkbox>
+              </div>
+              <div class="grid-item">
+                <mat-checkbox formControlName="domingo">Domingo</mat-checkbox>
+              </div>
+            </div>
+          </section>
+        </fieldset>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <fieldset class="scheduler-border shadow-sm">
+              <legend class="scheduler-border font-usco-vt">
+                Horario venta ticket
+              </legend>
+              <div style="display: flex">
+                <p style="font-size: smaller; margin: 0.5rem">Hora incial</p>
+                <timepicker formControlName="horaIncioVenta"></timepicker>
+                <p style="font-size: smaller; margin: 0.5rem">Hora final</p>
+                <timepicker formControlName="horaFinVenta"></timepicker>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <fieldset class="scheduler-border shadow-sm">
+              <legend class="scheduler-border font-usco-vt">
+                Horario servicio restaurante
+              </legend>
+              <div style="display: flex">
+                <p style="font-size: smaller; margin: 0.5rem">Hora incial</p>
+                <timepicker formControlName="horaInicioAtencion"></timepicker>
+                <p style="font-size: smaller; margin: 0.5rem">Hora final</p>
+                <timepicker formControlName="horaFinAtencion"></timepicker>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-warning" (click)="onNoClick()">
+    <i class="fa-solid fa-xmark"></i> Cancelar
+  </button>
+  <button class="btn btn-success ml-2" (click)="guardarRegistro()">
+    <i class="fa-solid fa-floppy-disk"></i> Guardar
+  </button>
+</mat-dialog-actions>

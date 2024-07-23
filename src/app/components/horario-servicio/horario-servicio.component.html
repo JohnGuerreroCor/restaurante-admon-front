@@ -1,0 +1,405 @@
+<app-navbar>
+  <div class="p-4">
+    <div class="card rounded-2 shadow-sm mt-5 mb-5">
+      <div
+        class="card-header text-center ml-4 mr-4 cursor-select"
+        [routerLink]="['/inicio']"
+        routerLinkActive="router-link-active"
+      >
+        <h4 class="font-usco-default">Horario servicio</h4>
+      </div>
+      <div class="card-body">
+        <div class="row pl-4 pr-4" *ngIf="(infoTarjetas | json) != '[]'">
+          <div class="col-sm-4 mb-3" *ngIf="infoTarjetas[0]!.estado !== 0">
+            <mat-card-header
+              style="
+                background-color: #ffe69c;
+                border-radius: 10px 10px 0px 0px;
+              "
+            >
+              <div mat-card-avatar class="example-header-image pt-1">
+                <i class="fa-solid fa-ticket fa-2x"></i>
+              </div>
+              <mat-card-title>Desayuno</mat-card-title>
+              <mat-card-subtitle>usco</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card class="card bg-light">
+              <div class="row pt-1">
+                <div class="col">
+                  <table class="table table-bordered text-center">
+                    <thead>
+                      <tr>
+                        <th scope="col">Servicio</th>
+                        <th scope="col">Atencion</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          {{
+                            infoTarjetas[0]!.horaIncioVenta
+                              ? infoTarjetas[0]!.horaIncioVenta +
+                                " - " +
+                                infoTarjetas[0]!.horaFinVenta
+                              : "Horario no disponible"
+                          }}
+                        </td>
+                        <td>
+                          {{
+                            infoTarjetas[0]!.horaInicioAtencion
+                              ? infoTarjetas[0]!.horaInicioAtencion +
+                                " - " +
+                                infoTarjetas[0]!.horaFinAtencion
+                              : "Horario de atención no disponible"
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th colspan="2">Dias</th>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <div class="grid-container">
+                            <div
+                              class="grid-item"
+                              *ngFor="let desayuno of desayunos"
+                            >
+                              {{ desayuno.dia.nombre || "Día no disponible" }}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Max. consumos</th>
+                        <th>Max. ventas</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          {{
+                            infoTarjetas[0]!.cantidadComidas
+                              ? infoTarjetas[0]!.cantidadComidas
+                              : "Cantidad no disponible"
+                          }}
+                        </td>
+                        <td>
+                          {{
+                            infoTarjetas[0]!.cantidadVentas
+                              ? infoTarjetas[0]!.cantidadVentas
+                              : "Cantidad no disponible"
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th colspan="2">Número tiquetes por estudiante</th>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="font-size: 16px">
+                          {{ infoTarjetas[0]!.cantidadTiquetes }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row text-center pb-4 pl-4 pr-4">
+                <div class="col">
+                  <button
+                    class="btn btn-dark btn-sm btn-lg btn-block"
+                    (click)="inhabilitarHabilitarDia(infoTarjetas[0])"
+                  >
+                    <i class="fa-solid fa-xmark"></i> Cancelar
+                  </button>
+                </div>
+                <div class="col">
+                  <button
+                    class="btn btn-usco-vt btn-sm btn-lg btn-block"
+                    (click)="editarHorarioServicio(infoTarjetas[0], desayunos)"
+                  >
+                    <i class="fa-solid fa-pencil"></i> Editar
+                  </button>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+
+          <div class="col-sm-4 mb-3" *ngIf="infoTarjetas[1]!.estado !== 0">
+            <mat-card-header
+              style="
+                background-color: #9ec5fe;
+                border-radius: 10px 10px 0px 0px;
+              "
+            >
+              <div mat-card-avatar class="example-header-image pt-1">
+                <i class="fa-solid fa-ticket fa-2x"></i>
+              </div>
+              <mat-card-title>Almuerzo</mat-card-title>
+              <mat-card-subtitle>usco</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card class="card bg-light">
+              <div class="row pt-1">
+                <div class="col">
+                  <table class="table table-bordered text-center">
+                    <thead>
+                      <tr>
+                        <th scope="col">Servicio</th>
+                        <th scope="col">Atencion</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          {{
+                            infoTarjetas[1]!.horaIncioVenta
+                              ? infoTarjetas[1]!.horaIncioVenta +
+                                " - " +
+                                infoTarjetas[1]!.horaFinVenta
+                              : "Horario no disponible"
+                          }}
+                        </td>
+                        <td>
+                          {{
+                            infoTarjetas[1]!.horaInicioAtencion
+                              ? infoTarjetas[1]!.horaInicioAtencion +
+                                " - " +
+                                infoTarjetas[1]!.horaFinAtencion
+                              : "Horario de atención no disponible"
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th colspan="2">Dias</th>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <div class="grid-container">
+                            <div
+                              class="grid-item"
+                              *ngFor="let almuerzo of almuerzos"
+                            >
+                              {{ almuerzo.dia.nombre || "Día no disponible" }}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Max. consumos</th>
+                        <th>Max. ventas</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          {{
+                            infoTarjetas[1]!.cantidadComidas
+                              ? infoTarjetas[1]!.cantidadComidas
+                              : "Cantidad no disponible"
+                          }}
+                        </td>
+                        <td>
+                          {{
+                            infoTarjetas[1]!.cantidadVentas
+                              ? infoTarjetas[1]!.cantidadVentas
+                              : "Cantidad no disponible"
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th colspan="2">Número tiquetes por estudiante</th>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="font-size: 16px">
+                          {{ infoTarjetas[1]!.cantidadTiquetes }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row text-center pb-4 pl-4 pr-4">
+                <div class="col">
+                  <button
+                    class="btn btn-dark btn-sm btn-lg btn-block"
+                    (click)="inhabilitarHabilitarDia(infoTarjetas[1])"
+                  >
+                    <i class="fa-solid fa-xmark"></i> Cancelar
+                  </button>
+                </div>
+                <div class="col">
+                  <button
+                    class="btn btn-usco-vt btn-sm btn-lg btn-block"
+                    (click)="editarHorarioServicio(infoTarjetas[1], almuerzos)"
+                  >
+                    <i class="fa-solid fa-pencil"></i> Editar
+                  </button>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+          <div class="col-sm-4 mb-3" *ngIf="infoTarjetas[2]!.estado !== 0">
+            <mat-card-header
+              style="
+                background-color: #c5b3e6;
+                border-radius: 10px 10px 0px 0px;
+              "
+            >
+              <div mat-card-avatar class="example-header-image pt-1">
+                <i class="fa-solid fa-ticket fa-2x"></i>
+              </div>
+              <mat-card-title>Cena</mat-card-title>
+              <mat-card-subtitle>usco</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card class="card bg-light">
+              <div class="row pt-1">
+                <div class="col">
+                  <table class="table table-bordered text-center">
+                    <thead>
+                      <tr>
+                        <th scope="col">Servicio</th>
+                        <th scope="col">Atencion</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          {{
+                            infoTarjetas[2]!.horaIncioVenta
+                              ? infoTarjetas[2]!.horaIncioVenta +
+                                " - " +
+                                infoTarjetas[2]!.horaFinVenta
+                              : "Horario no disponible"
+                          }}
+                        </td>
+                        <td>
+                          {{
+                            infoTarjetas[2]!.horaInicioAtencion
+                              ? infoTarjetas[2]!.horaInicioAtencion +
+                                " - " +
+                                infoTarjetas[2]!.horaFinAtencion
+                              : "Horario de atención no disponible"
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th colspan="2">Dias</th>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <div class="grid-container">
+                            <div class="grid-item" *ngFor="let cena of cenas">
+                              {{ cena.dia.nombre || "Dias no disponible" }}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Max. consumos</th>
+                        <th>Max. ventas</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          {{
+                            infoTarjetas[2]!.cantidadComidas
+                              ? infoTarjetas[2]!.cantidadComidas
+                              : "Cantidad no disponible"
+                          }}
+                        </td>
+                        <td>
+                          {{
+                            infoTarjetas[2]!.cantidadVentas
+                              ? infoTarjetas[2]!.cantidadVentas
+                              : "Cantidad no disponible"
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th colspan="2">Número tiquetes por estudiante</th>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="font-size: 16px">
+                          {{ infoTarjetas[2]!.cantidadTiquetes }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row text-center pb-4 pl-4 pr-4">
+                <div class="col">
+                  <button
+                    class="btn btn-dark btn-sm btn-lg btn-block"
+                    (click)="inhabilitarHabilitarDia(infoTarjetas[2])"
+                  >
+                    <i class="fa-solid fa-xmark"></i> Cancelar
+                  </button>
+                </div>
+                <div class="col">
+                  <button
+                    class="btn btn-usco-vt btn-sm btn-lg btn-block"
+                    (click)="editarHorarioServicio(infoTarjetas[2], cenas)"
+                  >
+                    <i class="fa-solid fa-pencil"></i> Editar
+                  </button>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+          <div class="col-sm-4 mb-3" *ngIf="infoTarjetas[0]!.estado === 0">
+            <mat-card-header style="background-color: #ffe69c">
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Desayuno</mat-card-title>
+              <mat-card-subtitle>usco</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card class="card bg-light">
+              <div class="ml-2 mt-2">
+                <p>Desayuno desactivado</p>
+                <button
+                  mat-icon-button
+                  aria-label="Boton inhabilitarHabilitar"
+                  (click)="inhabilitarHabilitarDia(infoTarjetas[0])"
+                >
+                  <mat-icon>check_circle</mat-icon>
+                </button>
+              </div>
+            </mat-card>
+          </div>
+          <div class="col-sm-4 mb-3" *ngIf="infoTarjetas[1]!.estado === 0">
+            <mat-card-header style="background-color: #9ec5fe">
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Almuerzo</mat-card-title>
+              <mat-card-subtitle>usco</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card class="card bg-light">
+              <div class="ml-2 mt-2">
+                <p>Almuerzo desactivado</p>
+                <button
+                  mat-icon-button
+                  aria-label="Boton inhabilitarHabilitar"
+                  (click)="inhabilitarHabilitarDia(infoTarjetas[1])"
+                >
+                  <mat-icon>check_circle</mat-icon>
+                </button>
+              </div>
+            </mat-card>
+          </div>
+          <div class="col-sm-4 mb-3" *ngIf="infoTarjetas[2]!.estado === 0">
+            <mat-card-header style="background-color: #c5b3e6">
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Cena</mat-card-title>
+              <mat-card-subtitle>usco</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card class="card bg-light">
+              <div class="ml-2 mt-2">
+                <p>Cena desactivado</p>
+                <button
+                  mat-icon-button
+                  aria-label="Boton inhabilitarHabilitar"
+                  (click)="inhabilitarHabilitarDia(infoTarjetas[2])"
+                >
+                  <mat-icon>check_circle</mat-icon>
+                </button>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navbar>

@@ -1,0 +1,30 @@
+<!-- Modal horarios -->
+<div class="modal-background">
+    <!-- Contenido del modal principal -->
+    <div class="modal-content modal-content-container">
+        <form>
+   
+            <mat-form-field class="example-full-width">
+                <mat-label>Buscar Supervisor</mat-label>
+                <input type="text"
+                       placeholder="Codigo, nombre, identificacion"
+                       aria-label="Number"
+                       matInput
+                       [formControl]="myControl"
+                       [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+        
+
+            <div class="buttons">
+                <button mat-button color="primary" (click)="guardarRegistro()">Guardar</button>
+                <button mat-button color="warn" (click)="onNoClick()">Volver</button>
+            </div>
+        </form>
+
+    </div>
+</div>

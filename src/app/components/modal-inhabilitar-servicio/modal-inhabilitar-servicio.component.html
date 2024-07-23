@@ -1,0 +1,50 @@
+<div mat-dialog-title style="background-color: #8f141b; color: white;">
+    <div class="row">
+        <div class="col">
+            <h3 class="mb-3 ml-2">Horario de servicio</h3>
+        </div>
+    </div>
+</div>
+<mat-dialog-content>
+    <div class="row mt-4">
+        <div class="col">
+            <h4 class="ml-2 mb-3">Inhabilitacion del servicio</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-form-field class="ml-2">
+                <mat-label>Fecha Inicial</mat-label>
+                <input matInput [matDatepicker]="pickerIncial">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerIncial"></mat-datepicker-toggle>
+                <mat-datepicker #pickerIncial></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field class="ml-4">
+                <mat-label>Fecha Final</mat-label>
+                <input matInput [matDatepicker]="pickerFinal">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFinal></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-form-field class="pl-2 pr-2 pt-2" style="width: 600px;">
+                <mat-label>Observacion de la Inhabilitacion del Servicio</mat-label>
+                <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <div class="row">
+        <div class="col">
+            <button class="ml-3 mb-2" mat-button color="primary" (click)="inhabilitar()">Inhabilitar</button>
+            <button class="mb-2" mat-button color="warn" (click)="cerrarModal()">Atras</button>
+        </div>
+    </div>
+</div>

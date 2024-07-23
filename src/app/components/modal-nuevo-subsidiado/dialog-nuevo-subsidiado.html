@@ -1,0 +1,204 @@
+<h2 mat-dialog-title class="text-white bg-usco-vt-d6">
+  <i class="fa-solid fa-circle-info"></i> Subsidiado
+</h2>
+<mat-dialog-content>
+  <form>
+    <div class="row mt-4" *ngIf="!isEditing">
+      <div class="col">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Buscar Subsidiado</mat-label>
+          <input
+            type="text"
+            placeholder="Codigo"
+            matInput
+            [formControl]="myControl"
+          />
+          <button matSuffix mat-icon-button (click)="buscarEstudiante()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <!--  <div class="col">
+        <button class="btn btn-usco-vt mt-2" (click)="buscarEstudiante()">
+          Buscar
+        </button>
+      </div> -->
+    </div>
+    <div *ngIf="isInfoVisible">
+      <fieldset class="scheduler-border shadow-sm">
+        <legend class="scheduler-border font-usco-vt">
+          Formulario asignación subsidiario
+        </legend>
+        <div class="row mt-4">
+          <div class="col">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Nombre y Apellido</mat-label>
+              <input
+                type="text"
+                matInput
+                [value]="gabu.nombre"
+                disabled="true"
+                readonly
+              />
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Identificación</mat-label>
+              <input
+                type="text"
+                matInput
+                [value]="gabu.identificacion"
+                disabled="true"
+                readonly
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Vigencia</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                [(ngModel)]="gabu.vigencia"
+                name="vigencia"
+              />
+              <mat-hint>DD/MM/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Código</mat-label>
+              <input
+                type="text"
+                matInput
+                [value]="gabu.codigoEstudiante"
+                readonly
+                disabled="true"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Programa</mat-label>
+              <input
+                type="text"
+                matInput
+                [value]="gabu.programa"
+                readonly
+                disabled="true"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col text-center mt-2">
+            <div class="form-check form-check-inline">
+              <mat-radio-group
+                aria-label="Select an option"
+                [(ngModel)]="radioSeleccionado"
+                name="opcionSeleccionada"
+              >
+                <mat-radio-button
+                  class="form-check-input"
+                  value="supervisor"
+                  (click)="seleccionRadio('supervisor')"
+                  ><strong>Supervisor</strong></mat-radio-button
+                >
+                <mat-radio-button
+                  class="form-check-input"
+                  value="subsidiado"
+                  (click)="seleccionRadio('subsidiado')"
+                  ><strong>Subsidiado</strong></mat-radio-button
+                >
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <table class="table mt-2">
+              <thead>
+                <tr>
+                  <th scope="col">Día de la semana</th>
+                  <th scope="col">Desayuno</th>
+                  <th scope="col">Almuerzo</th>
+                  <th scope="col">Cena</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr class="select-all-row">
+                  <td><strong>Marcar todos</strong></td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      (change)="toggleSelectAll('desayuno')"
+                      [checked]="isAllSelected('desayuno')"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      (change)="toggleSelectAll('almuerzo')"
+                      [checked]="isAllSelected('almuerzo')"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      (change)="toggleSelectAll('cena')"
+                      [checked]="isAllSelected('cena')"
+                    />
+                  </td>
+                </tr>
+                <tr *ngFor="let day of daysOfWeek">
+                  <td>{{ day }}</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      [id]="day + '-desayuno'"
+                      (change)="toggleMealSelection(day, 'desayuno')"
+                      [checked]="selectedMeals[day + '-desayuno']"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      [id]="day + '-almuerzo'"
+                      (change)="toggleMealSelection(day, 'almuerzo')"
+                      [checked]="selectedMeals[day + '-almuerzo']"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      [id]="day + '-cena'"
+                      (change)="toggleMealSelection(day, 'cena')"
+                      [checked]="selectedMeals[day + '-cena']"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end" *ngIf="isInfoVisible">
+  <button class="btn btn-warning" (click)="onNoClick()">
+    <i class="fa-solid fa-xmark"></i> Cancelar
+  </button>
+  <button class="btn btn-success ml-2" (click)="guardarRegistro()">
+    <i class="fa-solid fa-floppy-disk"></i> Guardar
+  </button>
+</mat-dialog-actions>

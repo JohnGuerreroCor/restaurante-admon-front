@@ -1,0 +1,93 @@
+.card {
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 14%) !important;
+  border-radius: 10px !important;
+  color: rgba(0, 0, 0, 0.87);
+  background: #fff;
+  padding-top: 0px !important;
+}
+
+.card-header {
+  box-shadow: 0 5px 20px -12px rgb(0 0 0 / 42%), 0 4px 25px 0px rgb(0 0 0 / 12%),
+    0 8px 10px -5px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #4d626c;
+  margin-top: -25px !important;
+  color: #fff;
+  height: 65px !important;
+}
+
+
+/* Estilos para el calendario */
+.calendario {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+/* Estilos para cada mes */
+.mes {
+  width: 30%;
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 10px;
+  text-align: center;
+  /* background-color: #4D626C; */
+}
+
+/* Estilos para el título del mes */
+.mes-titulo {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  color: white;
+  background-color: #1e262b;
+}
+
+/* Estilos para los días */
+.dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 4px;
+  /* color: white; */
+}
+
+/* Estilos para cada día de la semana */
+.dia-semana {
+  font-weight: bold;
+  /* background-color: #4D626C; */
+  padding: 5px;
+}
+
+/* Estilos para cada día */
+.dia {
+  border: 1px solid #ccc;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Estilos para los días festivos */
+.festivo {
+  background-color: #f44336;
+  color: #fff;
+}
+
+/* Estilos para hacer el calendario responsive en pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .calendario {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mes {
+    width: 80%;
+  }
+}
+
+.selector-anio {
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+}

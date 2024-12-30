@@ -1,9 +1,11 @@
 export const environment = {
-  production: false,
+  //production: false,
   //DESCOMENTAR LOCAL
-  //production: true,
+  production: true,
   //DESCOMENTAR Local
-  URL_BACKEND : "http://localhost:8080/restaurante_admon-1.0",
+  //URL_BACKEND : "http://localhost:8080/restaurante_admon-1.0",
   //DESCOMENTAR PRODUCCIÓN
-  //URL_BACKEND : "https://sanagustin.usco.edu.co/restaurante_admon"s
+  //URL_BACKEND : "https://sanagustin.usco.edu.co/restaurante_admon"
+  //DESCOMENTAR SERVIDRO PRUEBAS
+  URL_BACKEND : "https://maritza.usco.edu.co/restaurante_admon"
 };
